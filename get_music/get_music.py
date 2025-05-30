@@ -1,29 +1,36 @@
 import os
-from pytube import YouTube
+from pytubefix import YouTube
 from pydub import AudioSegment
-
+AudioSegment.converter = "/usr/bin/ffmpeg"
+  # Adjust this path if ffmpeg is located elsewhere
 def download_song():
     #downloads the song from youtube in mp4 format
-    video_to_download = input('insert the link of the youtube song that you want to download: ')
-    print(video_to_download)
-    YouTube(video_to_download).streams.first().download()
-    yt = YouTube(video_to_download)
-    global video
+    url = input('insert the link of the youtube song that you want to download: ')
+    yt = YouTube(url)
     video= yt.streams.filter(progressive=True, file_extension='mp4').first()
-    destination = "temp_audio"
+    output_dir = "temp_audio"
+    os.makedirs(output_dir, exist_ok=True)
+    out_file = video.download(output_path=output_dir)
+    return out_file
 
-def file_conversion():
+def file_conversion(out_file):
     #converts the file into mp3 format
-    global out_file
-    out_file = video.download(output_path="destination path")
     base, ext = os.path.splitext(out_file)
     audio = AudioSegment.from_file(out_file)
     mp3_file = base + '.mp3'
     audio.export(mp3_file,format='mp3')
+    return mp3_file
 
-def remove_mp4():
+def remove_mp4(out_file):
     #deletes the original mp4 file
     os.remove(out_file)
+
+def youtube_download():
+    out_file= download_song()
+    mp3_file = file_conversion(out_file)
+    remove_mp4(out_file)
+    print(f"Downloaded and converted to {mp3_file}")
+    repeat()
 
 def repeat():
     #asks if you want to download more songs
@@ -33,10 +40,5 @@ def repeat():
     else:
         exit()
 
-def youtube_download():
-    download_song()
-    file_conversion()
-    remove_mp4()
-    repeat()
-
-youtube_download()
+if __name__ == "__main__":
+    youtube_download()
