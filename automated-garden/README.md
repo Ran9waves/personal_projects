@@ -1,5 +1,8 @@
 # My ssf-sufficient-garden
 
+1. Run venv.sh to create the virtual environment and install the requirements automatically
+
+
 # Database of the plants that I have
     - this database should allow me to introduce:
         - type of plant

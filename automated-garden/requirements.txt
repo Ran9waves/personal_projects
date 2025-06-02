@@ -1,2 +1,6 @@
-python-dotenv
-mysql-connector-python-rf
+wheel
+libpq-dev
+python3-dev
+build-essential
+psycopg2
+
