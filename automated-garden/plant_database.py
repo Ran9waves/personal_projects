@@ -74,23 +74,39 @@ plants = [
     ('basilicum','2025-05-04','2025-05-04',None,'None',None,'Phase 4: Misc','Phase 1: Potatoes')
 ]
 
-#commit the changes to the database
-cur.executemany("""
-    INSERT INTO mygarden (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-""", plants)
+def update_plant_info():
+    print("\n ---Update plant information with your input---")
+    plant_id = input("Enter the ID f the plant that you want to update: ")
+    column = input("Which field do you want to update? (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext): ")
+    new_value = input(f"Enter the new value for {column} (leave empty for NULL): ")
+    
+    #Handle NULL values
+    if new_value == "":
+        new_value = None
 
+    #Build and execute the update query
+    query = f"UPDATE mygarden SET {column} = %s WHERE id = %s"
+    cur.execute(query, (new_value, plant_id))
+    conn.commit()
+    print("Update successful!")
 
-#commit the changes to the database
-conn.commit()
+# Insert data only if running as main and not updating
+if __name__ == "__main__":
+    update = input("\nDo you want to update plant information? (yes/no): ")
+    if update.lower() == "yes":
+        update_plant_info()
+    else:
+        cur.executemany("""
+            INSERT INTO mygarden (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """, plants)
+        conn.commit()
 
-# Print all rows to verify
-cur.execute("SELECT * FROM mygarden;")
-rows = cur.fetchall()
-for row in rows:
-    print(row)
+    # Print all rows to verify
+    cur.execute("SELECT * FROM mygarden;")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
 
-cur.close()
-conn.close()
-
-
+    cur.close()
+    conn.close()
