@@ -1,29 +1,18 @@
-
-
 # My ssf-sufficient-garden
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/d4f34dbd-73ec-48cc-93bf-08d116575a20" alt="my banner">
+</p>
 
 1. Run venv.sh to create the virtual environment and install the requirements automatically
-
-#TODO
-- Create args to decide which module of the program I want to run (main.py). 
-
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ran9waves&layout=compact)](https://github.com/ran9waves)
 
 # Database of the plants that I have
-    
-At this moment the script plant_database.py connects to the DB through python.
-When running, drops the old DB and generates a new one (to avoid iteration errors) with the fields indicated below.
-
-    -Id
-    -Name of the plant
-    -Date when it was planted, harvested, produced fruit, died
-    -Issues found while harvesting the plant
-    -Crop phase and the upcoming phase (it goes unter rotative crop to keep the earth healthy and productive.)
-
-In the end the program will print the actual information of the database.
-
-    TODO: 
-    - System to update the database when running the script (DELETE + UPDATE)
-    - Connect the harvest date to a cronjob, to make it send me a notification on that specific date.
+    - this database should allow me to introduce:
+        - type of plant
+        - when was it planted
+        - report if it was died
+        - update how many times did it provide fruit and how much of it (so that I can keep track of the productivity per plant)
+        - plagues that I had
 
 # Notification system: 
     - Sends notifications through email.
@@ -55,3 +44,4 @@ In the end the program will print the actual information of the database.
 # Monitoring system
     - Monitoring system that reports me whenever a plant experiences an issue (informs me, 
     then uses "AI against plagues" to report me about the potential problem)
+
