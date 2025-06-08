@@ -3,10 +3,17 @@
     <img src="https://github.com/user-attachments/assets/d4f34dbd-73ec-48cc-93bf-08d116575a20" alt="my banner">
 </p>
 
-1. Run venv.sh to create the virtual environment and install the requirements automatically
+To create this project, the following languages were used: 
+
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ran9waves&layout=compact)](https://github.com/ran9waves)
 
-# Database of the plants that I have
+#How to execute the program (UNDER CONSTRUCTION)
+
+1. Run venv.sh to create the virtual environment and install the requirements automatically
+2. At this moment the notification system module and the database of the plant can run separately. This project is still under contruction and in an upcoming future, some modules described below will be interconnected)
+3. To run the Database: python3 plant_database.py
+
+# Database of the plants in the garden
     - this database should allow me to introduce:
         - type of plant
         - when was it planted
