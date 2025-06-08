@@ -1,7 +1,10 @@
 # My ssf-sufficient-garden
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/d4f34dbd-73ec-48cc-93bf-08d116575a20" alt="my banner">
+</p>
 
 1. Run venv.sh to create the virtual environment and install the requirements automatically
-
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ran9waves&layout=compact)](https://github.com/ran9waves)
 
 # Database of the plants that I have
     - this database should allow me to introduce:
@@ -41,3 +44,4 @@
 # Monitoring system
     - Monitoring system that reports me whenever a plant experiences an issue (informs me, 
     then uses "AI against plagues" to report me about the potential problem)
+
