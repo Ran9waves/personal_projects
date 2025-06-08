@@ -1,7 +1,7 @@
 #.gitignore
 
 # Files
-
+my_garden.db
 
 # Environments
 .env
