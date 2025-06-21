@@ -2,14 +2,20 @@
 It will be connected to notification_system.py to inform me when determinated events take place"""
 
 ##TO DO
-# pending: I harvest them, issues that I had with them, where are they planted, quantity of light they need, watering period,
 # add elements in my database
 # delete elements in my database
-# update elements in my database
 # connect harvest data to cronjob and notification_system
 
 import psycopg2
 import os
+from dotenv import load_dotenv
+
+
+print("db_user:", os.getenv("db_user"))
+print("db_password:", os.getenv("db_password"))
+
+#load environment variables from the .env file
+load_dotenv(dotenv_path="where's your .env file?")  # Specify the path to your .env file
 
 #checks if the environment variables for database user and password are set
 db_user = os.getenv("db_user")
@@ -73,6 +79,47 @@ plants = [
     ('watermelon','2025-04-05',None,None,'None',None,'Phase 1: Misc','Phase 4: Potatoes'),
     ('basilicum','2025-05-04','2025-05-04',None,'None',None,'Phase 4: Misc','Phase 1: Potatoes')
 ]
+
+def add_plant():
+    print("\n ---Add a new plant to the new database")
+    #requesting user input to create a new plant entry
+    plantname = input("Enter the name of the plant: ")
+    plantdate = input("Enter the planting date (YYYY-MM-DD): ")
+    harvestdate = input("Enter the harvest date (YYYY-MM-DD, leave empty if not applicable): ")
+    plantfruit = input("Enter how many times the plant provided fruit (leave empty if not applicable): ")
+    plantissues = input("Enter any issues with the plant (leave empty if none): ")
+    plantdeath = input("Enter the date of plant's death (YYYY-MM-DD, leave empty if not applicable): ")
+    cropphase = input("Enter the current crop phase of the plant: ")
+    plantnext = input("Enter the next plant to be planted after this one: ")
+
+    #convert empty strings to None
+    harvestdate = harvestdate if harvestdate else None
+    plantfruit = plantfruit if plantfruit else None
+    plantissues = plantissues if plantissues else None
+    plantdeath = plantdeath if plantdeath else None
+
+    cur.execute("""
+        INSERT INTO mygarden (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    """, (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext))
+    conn.commit()
+    print("Plant added successfully!")
+
+def delete_plant():
+    print("\n ---Delete a plant from the database")
+
+    #prompts a list of all the plants in the database
+    cur.execute("SELECT id, plantname FROM mygarden;")
+    print("This is the current list of plants in the database:")
+    for plant in plants:
+        print(f"ID: {plant[0]}, Name: {plant[1]}")
+
+    #requests the user to input the ID of the plant they want to delete
+    plant_id = input("Enter the ID of the plant you want to delete: ")
+    cur.execute("DELETE FROM mygarden WHERE id = %s", (plant_id))
+    conn.commit()
+    print("Plant deleted successfully!")
+
 
 def update_plant_info():
     print("\n ---Update plant information with your input---")
