@@ -5,8 +5,11 @@ from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import os
 
+print("db_user:", os.getenv("db_user"))
+print("db_password:", os.getenv("db_password"))
+
 #load environment variables from the .env file
-load_dotenv()
+load_dotenv(dotenv_path="/home/ran9waves/personal_projects/automated-garden/.env")
 
 #Retrieve environment variables securely
 smtp_server = os.getenv("SMTP_SERVER")
