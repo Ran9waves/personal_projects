@@ -10,12 +10,8 @@ import psycopg2
 import os
 from dotenv import load_dotenv
 
-
-print("db_user:", os.getenv("db_user"))
-print("db_password:", os.getenv("db_password"))
-
 #load environment variables from the .env file
-load_dotenv(dotenv_path="where's your .env file?")  # Specify the path to your .env file
+load_dotenv()  # loads your .env file
 
 #checks if the environment variables for database user and password are set
 db_user = os.getenv("db_user")
@@ -37,9 +33,9 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 # In case there's an old outdated table, we drop it to start fresh.
-cur.execute("DROP TABLE IF EXISTS mygarden;")
+#cur.execute("DROP TABLE IF EXISTS mygarden;")
 
-#creates a table in the database if it does not exist.
+#Only creates a table in the database if it does not exist.
 #column values of the database: id, plant_name, planted_date, harvest_date
 cur.execute("""
             CREATE TABLE IF NOT EXISTS mygarden (
@@ -56,7 +52,7 @@ cur.execute("""
 """)
 
 # Clear table for testing (optional, remove in production)
-cur.execute("DELETE FROM mygarden;")
+#cur.execute("DELETE FROM mygarden;")
 
 
 # This is a list of tuples, where each tuple represents a row to be inserted into the database.
@@ -80,8 +76,50 @@ plants = [
     ('basilicum','2025-05-04','2025-05-04',None,'None',None,'Phase 4: Misc','Phase 1: Potatoes')
 ]
 
+# Insert initial data only if the table is empty
+cur.execute("SELECT COUNT(*) FROM mygarden;")
+if cur.fetchone()[0] == 0:
+    cur.executemany("""
+        INSERT INTO mygarden (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    """, plants)
+    conn.commit()
+
+def initialize_database():
+    """(Re)creates the mygarden table and inserts the default plants."""
+    cur.execute("DROP TABLE IF EXISTS mygarden;")
+    cur.execute("""
+        CREATE TABLE mygarden (
+            id SERIAL PRIMARY KEY,
+            plantname VARCHAR(255),
+            plantdate DATE NOT NULL,
+            harvestdate DATE,
+            plantfruit VARCHAR(255),
+            plantissues VARCHAR(255),
+            plantdeath DATE,
+            cropphase VARCHAR(255),
+            plantnext VARCHAR(255)
+        )
+    """)
+    cur.executemany("""
+        INSERT INTO mygarden (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    """, plants)
+    conn.commit()
+    print("Database initialized with default plants db.")
+
+def show_all_plants():
+    """prints all the plants in the database"""
+
+    cur.execute("SELECT * FROM mygarden;")
+    rows = cur.fetchall()
+    print("\nCurrent plants in the database;")
+    for row in rows:
+        print(row)
+
 def add_plant():
-    print("\n ---Add a new plant to the new database")
+    """adds a new full entry ((whole plant information))"""
+    print("\n ---Add a new plant to the database---")
     #requesting user input to create a new plant entry
     plantname = input("Enter the name of the plant: ")
     plantdate = input("Enter the planting date (YYYY-MM-DD): ")
@@ -104,6 +142,7 @@ def add_plant():
     """, (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext))
     conn.commit()
     print("Plant added successfully!")
+    show_all_plants() # Show all plants after adding a new one
 
 def delete_plant():
     print("\n ---Delete a plant from the database")
@@ -111,14 +150,15 @@ def delete_plant():
     #prompts a list of all the plants in the database
     cur.execute("SELECT id, plantname FROM mygarden;")
     print("This is the current list of plants in the database:")
-    for plant in plants:
+    for plant in cur.fetchall():
         print(f"ID: {plant[0]}, Name: {plant[1]}")
 
     #requests the user to input the ID of the plant they want to delete
     plant_id = input("Enter the ID of the plant you want to delete: ")
-    cur.execute("DELETE FROM mygarden WHERE id = %s", (plant_id))
+    cur.execute("DELETE FROM mygarden WHERE id = %s", (plant_id,))
     conn.commit()
     print("Plant deleted successfully!")
+    show_all_plants() # Show all plants after adding a new one
 
 
 def update_plant_info():
@@ -136,6 +176,7 @@ def update_plant_info():
     cur.execute(query, (new_value, plant_id))
     conn.commit()
     print("Update successful!")
+    show_all_plants() # Show all plants after adding a new one
 
 # Insert data only if running as main and not updating
 if __name__ == "__main__":

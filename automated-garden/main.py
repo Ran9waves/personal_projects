@@ -8,6 +8,12 @@ import plant_database
 def main():
     parser = argparse.ArgumentParser(description="Automated Garden CLI")
     parser.add_argument(
+        "--initialize-db",
+        action="store_true",
+        help="Initializes the plant database with default values"
+    )
+
+    parser.add_argument(
         "--plant-db",
         action="store_true",
         help="Initializes plant_database.py and prints the actual db contents"
@@ -34,7 +40,10 @@ def main():
     args = parser.parse_args()
 
     if args.plant_db:
-        import plant_database
+        pass
+    elif args.initialize_db:
+        plant_database.initialize_database()
+        
     elif args.update_plant:
         plant_database.update_plant_info()
     elif args.delete_plant:
