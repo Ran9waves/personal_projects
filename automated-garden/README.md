@@ -11,16 +11,18 @@ To create this project, the following languages were used:
 
 1. Run venv.sh to create the virtual environment and install the requirements automatically
 2. At this moment the notification system module and the database of the plant can run separately. This project is still under contruction and in an upcoming future, some modules described below will be interconnected)
-3. Below you will find the descriptions and the flags to run the different features:
 
-# Database of the plants in the garden
-    - the module plant_database.py:
-        - displays the content of mygarden database (id, name of the plant, when was it planted, harvested, provided fruit, died, issues related with the plant, crop phase and upcoming crop phase) by running the command: python3 main.py --plantdb-show
+# How it works
+To run the program, you only need to execute the main.py file, which will display a menu with all the available options like:
+- Initialize the database (first thing to do when running the program for the first time!!)
+- Show the database of plants
+- Add a new plant
+- Delete a plant
+- Update information about a plant (you can edit it field by field)
+- Quit 
 
-        - updates plant database information through user's input. It can be done by running the command: python3 main.py --plantdb-update
 
-        if none of these commands is executed the program exits
-
+Upcoming steps:
 
 # Notification system: 
     - Sends notifications through email.
