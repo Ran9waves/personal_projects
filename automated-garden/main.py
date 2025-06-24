@@ -1,10 +1,9 @@
-
+from art import *
 from simple_term_menu import TerminalMenu #for creating a terminal menu
-
 import sys
-
 import plant_database
 
+print(text2art("""Automated Garden Project""",font="small")) # Prints the title in ASCII art
 
 def main():
     # Create a command-line interface for the Automated Garden
