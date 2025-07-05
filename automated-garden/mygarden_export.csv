@@ -1,0 +1,19 @@
+id,plantname,plantdate,harvestdate,plantfruit,plantissues,plantdeath,cropphase,plantnext
+1,buddha hand lime,2025-05-04,,,Red spider. Already cured,,Phase 4: Misc,Phase 1: Potatoes
+2,white finger lime,2025-04-15,,,Mold. Still in treatment,,Phase 4: Misc,Phase 1: Potatoes
+3,strawberries,2025-04-12,2025-05-01,2,None,,Phase 4: Misc,Phase 1: Potatoes
+4,red finger lime,2025-04-05,,,None,,Phase 4: Misc,Phase 1: Potatoes
+5,raspberries,2025-04-12,2025-04-26,3,None,,Phase 4: Misc,Phase 1: Potatoes
+6,mint,2024-04-26,2024-04-26,since it grew,None,,Phase 4: Misc,Phase 1: Potatoes
+7,purple sweet potato,2025-11-23,,,Unidentified nibbing bug,,Phase 1: Potatoes,Phase 2: beans
+8,giant carrots,2025-05-15,,,flood,2025-05-30,Phase 3: beets,Phase 1: Misc
+9,setubal onion,2025-05-04,,,None,,Phase 3: beets,Phase 4: Misc
+10,cherry tomatoes,2025-04-12,,,None,,Phase 4: Misc,Phase 1: Potatoes
+11,lettuce,2025-05-20,,,None,,Phase 4: Misc,Phase 1: Potatoes
+12,kohlrabi,2025-05-20,,,None,,Phase 3: beet,Phase 4: beets
+13,beet,2025-05-04,,,None,,Phase 3: beets,Phase 4: misc
+14,melon ananas,2025-05-20,,,None,,Phase 4: Misc,Phase 1: Potatoes
+15,radish,2025-04-12,,,None,,Phase 3: Misc,Phase 4: misc
+16,watermelon,2025-04-05,,,None,,Phase 1: Misc,Phase 4: Potatoes
+17,basilicum,2025-05-04,2025-05-04,,None,,Phase 4: Misc,Phase 1: Potatoes
+20,lemon tree,2025-06-25,2025-07-05,,,,test,test

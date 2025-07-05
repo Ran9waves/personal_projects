@@ -9,6 +9,20 @@ It will be connected to notification_system.py to inform me when determinated ev
 import psycopg2
 import os
 from dotenv import load_dotenv
+import csv
+
+def export_to_csv(filename="mygarden_export.csv"):
+    """Exports the current plant database to a CSV file."""
+    cur.execute("SELECT * FROM mygarden;")
+    rows = cur.fetchall()
+    headers = [desc[0] for desc in cur.description]  # Get column names
+
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)  # Write header
+        writer.writerows(rows)  # Write data
+
+    print(f"Data exported to {filename} successfully!")
 
 #load environment variables from the .env file
 load_dotenv()  # loads your .env file
@@ -143,6 +157,7 @@ def add_plant():
     conn.commit()
     print("Plant added successfully!")
     show_all_plants() # Show all plants after adding a new one
+    export_to_csv()
 
 def delete_plant():
     print("\n ---Delete a plant from the database")
@@ -159,6 +174,7 @@ def delete_plant():
     conn.commit()
     print("Plant deleted successfully!")
     show_all_plants() # Show all plants after adding a new one
+    export_to_csv()
 
 
 def update_plant_info():
@@ -177,6 +193,7 @@ def update_plant_info():
     conn.commit()
     print("Update successful!")
     show_all_plants() # Show all plants after adding a new one
+    export_to_csv()
 
 # Insert data only if running as main and not updating
 if __name__ == "__main__":
