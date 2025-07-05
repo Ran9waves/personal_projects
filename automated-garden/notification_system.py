@@ -5,9 +5,6 @@ from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import os
 
-print("db_user:", os.getenv("db_user"))
-print("db_password:", os.getenv("db_password"))
-
 #load environment variables from the .env file
 load_dotenv()
 
@@ -15,10 +12,10 @@ load_dotenv()
 smtp_server = os.getenv("SMTP_SERVER")
 smtp_port = os.getenv("SMTP_PORT")
 smtp_login = os.getenv("SMTP_LOGIN")
-smtp_password = os.getenv("SMTP_PASSWORD")
+smtp_password = os.getenv("SMTP_LOGIN_PASSWORD")
 
-sender_email = "test2@mail.com"
-receiver_email = "test1@mail.com"
+sender_email = os.getenv("SENDER_EMAIL")
+receiver_email = os.getenv("RECEIVER_EMAIL")
 subject = "SWEET POTATOES CROP"
 
 def send_notification(subject, text):
