@@ -16,4 +16,4 @@ id,plantname,plantdate,harvestdate,plantfruit,plantissues,plantdeath,cropphase,p
 15,radish,2025-04-12,,,None,,Phase 3: Misc,Phase 4: misc
 16,watermelon,2025-04-05,,,None,,Phase 1: Misc,Phase 4: Potatoes
 17,basilicum,2025-05-04,2025-05-04,,None,,Phase 4: Misc,Phase 1: Potatoes
-20,lemon tree,2025-06-25,2025-07-05,,,,test,test
+20,lemon tree,2025-06-25,2025-07-06,,,,test,test

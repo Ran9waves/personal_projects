@@ -174,6 +174,7 @@ def delete_plant():
 
 def update_plant_info():
     print("\n ---Update plant information with your input---")
+    show_all_plants() # Show all plants after adding a new one
     plant_id = input("Enter the ID f the plant that you want to update: ")
     column = input("Which field do you want to update? (plantname, plantdate, harvestdate, plantfruit, plantissues, plantdeath, cropphase, plantnext): ")
     new_value = input(f"Enter the new value for {column} (leave empty for NULL): ")
