@@ -55,4 +55,5 @@ PENDING:
 # Monitoring system
     - Monitoring system that reports me whenever a plant experiences an issue (informs me, 
     then uses "AI against plagues" to report me about the potential problem)
+    - Pending to decide if it will be used a fixed webcam or a drone for monitoring the garden.
 
