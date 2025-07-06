@@ -22,14 +22,15 @@ To run the program, you only need to execute the main.py file, which will displa
 - Quit 
 
 
-Upcoming steps:
-
 # Notification system: 
-    - Sends notifications through email.
-    - The fields sender_email, receiver_email, subject and text can be modified (although the initial goal was to inform myself about the status of my crops)
-    
-    PENDING:
-    - First project: aproximate harvest date depending on the date of planting. Sweet potatoes use case, 90 days. 
+NOTE:at this moment only the harvest date notification is created.
+
+##Harvest date notification
+- So that the code can run remotely, there's a Github Action scheduled to run harvestdate_check.py module daily at 8:00 AM. 
+- Inside of harvestdate_check.py, we can find a script that will check the harvestdate column of mygarden_export.csv file (which contains the most recent information of the database), and in case that the harvestdate matches today's date, will send an email notitification.
+- Everytime that we execute a modification in the database (add, delete, update and entry or field), the mygarden_export.csv file will be regenerated (updated) automatically and we will need to commit it to the corresponding branch so that the Github Action can have the most updated information of the database and run correctly. 
+ 
+PENDING:
 
 # Watering system: 
     - humidity sensors or sound sensors?

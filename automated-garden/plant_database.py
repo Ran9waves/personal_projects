@@ -1,11 +1,6 @@
 """Manages (updates, adds, deletes elements) the database of the plants that I have planted in my garden.
 It will be connected to notification_system.py to inform me when determinated events take place"""
 
-##TO DO
-# add elements in my database
-# delete elements in my database
-# connect harvest data to cronjob and notification_system
-
 import psycopg2
 import os
 from dotenv import load_dotenv
