@@ -30,4 +30,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install psycopg2-binary python-dotenv
       - name: Run harvest notification script
-        run: python harvestdate_check.py
+        run: python automated-garden/harvestdate_check.py
