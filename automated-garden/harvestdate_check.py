@@ -10,12 +10,15 @@ load_dotenv()
 
 today = date.today().isoformat() # Get today's date in ISO format
 
-with open('mygarden_export.csv'):
-    reader = csv.DictReader(csvfile)
-    for row in reader:
-        if row["harvestdate"] == today:
-            plantname = row["plantname"]
-            send.notification(
-                f'Time to harvest {plantname} is ready to be harvested',
-                f'Today is the day to harvest your {plantname}. Make sure to check your garden and collect the fruits or vegetables. Happy harvesting!'
-            )
+try: 
+    with open('mygarden_export.csv'):
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if row["harvestdate"] == today:
+                plantname = row["plantname"]
+                send_notification(
+                    f'Time to harvest {plantname} is ready to be harvested',
+                    f'Today is the day to harvest your {plantname}. Make sure to check your garden and collect the fruits or vegetables. Happy harvesting!'
+                )
+except FileNotFoundError:
+    print("mygarden_export.csv not found. Skipping harvest date check.")
