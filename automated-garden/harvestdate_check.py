@@ -13,7 +13,7 @@ today = date.today().isoformat() # Get today's date in ISO format
 
 try: 
     with open('mygarden_export.csv'):
-        reader = csv.DictReader(csvfile)
+        reader = csv.DictReader(open('mygarden_export.csv', 'r'))
         for row in reader:
             if row["harvestdate"] == today:
                 plantname = row["plantname"]
