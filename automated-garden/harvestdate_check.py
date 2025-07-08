@@ -4,6 +4,7 @@ the notification system to send an email notification if the harvest date matche
 import os
 from dotenv import load_dotenv
 from datetime import date
+import csv
 from notification_system import send_notification
 
 load_dotenv()
