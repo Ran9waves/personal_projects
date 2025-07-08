@@ -10,7 +10,7 @@ load_dotenv()
 
 #Retrieve environment variables securely
 smtp_server = os.getenv("SMTP_SERVER")
-smtp_port = os.getenv("SMTP_PORT")
+smtp_port = int(os.getenv("SMTP_PORT", 587))
 smtp_login = os.getenv("SMTP_LOGIN")
 smtp_password = os.getenv("SMTP_LOGIN_PASSWORD")
 
@@ -28,7 +28,9 @@ def send_notification(subject, text):
 
     # Send the email
     with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.ehlo()
         server.starttls()  # Secure the connection
+        server.ehlo()
         server.login(smtp_login, smtp_password)
         server.sendmail(sender_email, receiver_email, message.as_string())
     
