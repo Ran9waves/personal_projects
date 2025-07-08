@@ -12,8 +12,8 @@ load_dotenv()
 today = date.today().isoformat() # Get today's date in ISO format
 
 try: 
-    with open('mygarden_export.csv'):
-        reader = csv.DictReader(open('mygarden_export.csv', 'r'))
+    with open('mygarden_export.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
         for row in reader:
             if row["harvestdate"] == today:
                 plantname = row["plantname"]
