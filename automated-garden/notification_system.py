@@ -23,19 +23,6 @@ if smtp_port and smtp_port.strip():
 else:
     smtp_port = 587
 
-# Ensure that all required environment variables are set
-required_vars = {
-    "SMTP_SERVER":smtp_server,
-    "SMTP_LOGIN":smtp_login,
-    "SMTP_LOGIN_PASSWORD":smtp_password,
-    "SENDER_EMAIL":sender_email,
-    "RECEIVER_EMAIL":receiver_email
-}
-missing_vars = [k for k, v in required_vars.items() if not v]
-if missing_vars:
-    raise Exception(f"Missing required environment variables: {', '.join(missing_vars)}")
-
-
 def send_notification(subject, text):
     """Function to send an email notification."""
     # Create a MIMEText object
