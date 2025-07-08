@@ -29,5 +29,8 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install psycopg2-binary python-dotenv
+      - name: Download mygarden_export.csv
+        run: curl -o mygarden_export.csv "https://raw.githubusercontent.com/Ran9waves/personal_projects/main/automated-garden/mygarden_export.csv"
+
       - name: Run harvest notification script
         run: python automated-garden/harvestdate_check.py
